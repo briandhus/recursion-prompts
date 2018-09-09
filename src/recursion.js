@@ -175,45 +175,70 @@ var palindrome = function(string) {
 // modulo(5,2) // 1
 // modulo(17,5) // 2
 // modulo(22,6) // 4
+//-2, -4 => 
 var modulo = function(x, y) {
 	if(x === 0 && y === 0){
 		return NaN;
 	}
-	// if (x < 0 && y > x) {
-	// 	return modulo(x - y, y);
-	// }
-	//-275 -274 => -1, -274
-	if(x >= y){
-		// if(x < 0){
-		// 	if(y < x){
-		// 		return x;
-		// 	}
-		// 	return modulo(x - y, y);
-		// }
-		return modulo(x - y, y);
+	if(x === 0){
+		return 0;
 	}
-	if(y > x){
-		return x;
-	}
-};
 
-// -275, -274
+  if (x > 0 && y > 0) {
+  	if (x === y) {
+      return 0;
+    }
+    if (y > x) {
+      return x;
+    }
+    if (x > y) {
+      return modulo(x - y, y);
+    }
+  }
+
+  var absX = -x;
+  var absY = -y;
+	if (x < 0) {
+    if (y < 0) {
+    	if (absX === absY) {
+        return -0;
+      }
+      if (absY > absX) {
+        return x;
+      } else {
+        return modulo(x - y, y);
+      }
+    } 
+    if (y > 0) {
+      if (absX > y) {
+      	return modulo(x + y, -y)
+      } else {
+      	return x;
+      }
+    }
+  }
+};
 
 // 12. Write a function that multiplies two numbers without using the * operator or
 // Math methods.
 var multiply = function(x, y) {
 	if(y < 0 && x < 0){
-		return -x + multiply(x , y + 1)
+		return -x + multiply(x , y + 1);
 	}
-
+	if(y < 0 && x > 0){
+		return -x + multiply(x , y + 1);
+	}
+	if(x < 0 && y > 0){
+		return x + multiply(x , y - 1);
+	}  
 	if(y > 0){
-		return x + multiply(x , y - 1)
+		return x + multiply(x , y - 1);
 	}
 	return y;
 };
--2 ,-3
 // -2 + (2, -2) => -2 + (2,-1) => -2 + (2 , -0) => -0
 // -6
+//3 + (3, 2 - 1)  2 + (2, 2 - 1)  1 + (1, 1 - 1) 
 
 
 // 13. Write a function that divides two numbers without using the / operator or
@@ -275,6 +300,10 @@ var rMap = function(array, callback) {
 // countKeysInObj(obj, 'r') // 1
 // countKeysInObj(obj, 'e') // 2
 var countKeysInObj = function(obj, key) {
+	// if(!typeof obj[Object.getOwnPropertyNames(obj)[0]] === 'object'){
+	// 	if(Object.getOwnPropertyNames(obj)[0] === key)
+	// }
+	// return 1 + countKeysInObj(obj, key);
 };
 
 // 23. Write a function that counts the number of times a value occurs in an object.
