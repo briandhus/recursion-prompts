@@ -244,7 +244,7 @@ var divide = function(x, y) {
 	if(x === 0 && y === 0){
 		return NaN;
 	}
-	
+
 	if(x === 0){
 		return 0;
 	}
@@ -282,6 +282,24 @@ var divide = function(x, y) {
 // http://www.cse.wustl.edu/~kjg/cse131/Notes/Recursion/recursion.html
 // https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
 var gcd = function(x, y) {
+	if (x < 0 || y < 0) {
+		return null;
+	}
+	if (x === 1 || y === 1) {
+		return 1;
+	}
+	if (x % y === 0) {
+		return y;
+	}
+	if (y % x === 0) {
+		return x;
+	}
+	if (x > y) {
+		return gcd(x - y, y);
+	}
+	if (x < y) {
+		return gcd(x, y - x);
+	}
 };
 
 // 15. Write a function that compares each character of two strings and returns true if
@@ -289,6 +307,15 @@ var gcd = function(x, y) {
 // compareStr('house', 'houses') // false
 // compareStr('tomato', 'tomato') // true
 var compareStr = function(str1, str2) {
+	if (str1 === '' && str2 === '') {
+		return true;
+	}
+
+	if (str1[0] === str2[0]) {
+		return compareStr(str1.substring(1), str2.substring(1));
+	}
+	
+	return false;
 };
 
 // 16. Write a function that accepts a string and creates an array where each letter
